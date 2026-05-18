@@ -77,8 +77,8 @@ public class ArvoreBinaria {
         if (atual != null) {
             // elemento tem 2 filhos
             if (atual.getDireita() != null) {
-                No aux = atual.getDireita(); //substituo
-                No auxPai = atual; //pai substituto
+                No aux = atual.getDireita();
+                No auxPai = atual;
                 while (aux.getEsquerda() != null) {
                     auxPai = aux;
                     aux = aux.getEsquerda();
@@ -127,7 +127,7 @@ public class ArvoreBinaria {
                 }
             } else {
                 if (noPai != null) {
-                        if (atual.getConteudo().compareTo(noPai.getConteudo()) == -1) {
+                        if (atual.getConteudo().compareTo(noPai.getConteudo()) < 0) {
                             noPai.setEsquerda(null);
                         } else {
                             noPai.setDireita(null);

@@ -10,7 +10,12 @@ public class Main {
         arvoreBinaria.inserir(13);
         arvoreBinaria.inserir(20);
         arvoreBinaria.exibir("Em");
-        arvoreBinaria.removerFolhas(20);
+        arvoreBinaria.removerFolhas(8);
+        arvoreBinaria.removerFolhas(5);
+        arvoreBinaria.removerFolhas(10);
+        arvoreBinaria.removerFolhas(9);
+        arvoreBinaria.removerFolhas(7);
+        arvoreBinaria.removerFolhas(18);
         arvoreBinaria.exibir("Em");
     }
 }

@@ -63,13 +63,10 @@ public class ArvoreBinaria {
         No atual = this.raiz;
         No noPai = null;
 
-        if (estaVazia()) {
-            return;
-        } else {
             while (atual != null) {
                 if (atual.getConteudo().equals(conteudo)) {
                     break;
-                } else if (conteudo.compareTo(atual.getConteudo()) == -1) { // atual é menor que o elemento que estou procurando
+                } else if (conteudo.compareTo(atual.getConteudo()) < 0) { // atual é menor que o elemento que estou procurando
                     noPai = atual;
                     atual = atual.getEsquerda();
                 } else {
@@ -77,18 +74,44 @@ public class ArvoreBinaria {
                     atual = atual.getDireita();
                 }
             }
-        }
         if (atual != null) {
             // elemento tem 2 filhos
             if (atual.getDireita() != null) {
-                No aux = atual.getDireita();
-                No auxPai = atual;
+                No aux = atual.getDireita(); //substituo
+                No auxPai = atual; //pai substituto
                 while (aux.getEsquerda() != null) {
                     auxPai = aux;
                     aux = aux.getEsquerda();
                 }
+                aux.setEsquerda(atual.getEsquerda());
                 if (noPai != null) {
-                    if (conteudo.compareTo(atual.getConteudo()) == -1) {
+                    if (atual.getConteudo().compareTo(noPai.getConteudo()) < 0) {
+                        noPai.setEsquerda(aux);
+                    } else {
+                        noPai.setDireita(aux);
+                    }
+                } else {
+                    this.raiz = aux;
+                    auxPai.setEsquerda(null);
+                    this.raiz.setDireita(auxPai);
+                    this.raiz.setEsquerda(atual.getEsquerda());
+                }
+
+                if (aux.getConteudo().compareTo(auxPai.getConteudo()) < 0) {
+                    auxPai.setEsquerda(null);
+                } else {
+                    auxPai.setDireita(null);
+                }
+             } else if (atual.getEsquerda() != null) { // tem filho so a esquerda
+                No aux = atual.getEsquerda();
+                No auxPai = atual;
+                while (aux.getDireita() != null) {
+                    auxPai = aux;
+                    aux = aux.getDireita();
+                }
+
+                if (noPai != null) {
+                    if (atual.getConteudo().compareTo(noPai.getConteudo()) < 0) {
                         noPai.setEsquerda(aux);
                     } else {
                         noPai.setDireita(aux);
@@ -96,42 +119,22 @@ public class ArvoreBinaria {
                 } else {
                     this.raiz = aux;
                 }
-                if (conteudo.compareTo(atual.getConteudo()) == -1) {
-                    noPai.setEsquerda(aux);
-                } else {
-                    noPai.setDireita(aux);
-                }
-                if (conteudo.compareTo(atual.getConteudo()) == -1) {
+
+                if (aux.getConteudo().compareTo(auxPai.getConteudo()) < 0) {
                     auxPai.setEsquerda(null);
                 } else {
                     auxPai.setDireita(null);
                 }
-            } else if (atual.getEsquerda() != null) { // tem filho so a esquerda
-                No aux = atual.getEsquerda();
-                No auxPai = atual;
-                while (aux.getDireita() != null) {
-                    auxPai = aux;
-                    aux = aux.getDireita();
-                }
+            } else {
                 if (noPai != null) {
-                    if (aux.getConteudo().compareTo(auxPai.getConteudo()) == -1) {
-                        auxPai.setEsquerda(null);
+                        if (atual.getConteudo().compareTo(noPai.getConteudo()) == -1) {
+                            noPai.setEsquerda(null);
+                        } else {
+                            noPai.setDireita(null);
+                        }
                     } else {
-                        auxPai.setDireita(null);
+                        this.raiz = null;
                     }
-                } else {
-                    this.raiz = aux;
-                }
-            } else { // nao tem filho
-                if (noPai != null) {
-                    if (atual.getConteudo().compareTo(noPai.getConteudo()) == -1) {
-                        noPai.setEsquerda(null);
-                    } else {
-                        noPai.setDireita(null);
-                    }
-                } else {
-                    this.raiz = null;
-                }
             }
         }
     }

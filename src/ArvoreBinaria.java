@@ -1,5 +1,5 @@
 public class ArvoreBinaria {
-    No raiz;
+    No raiz; 
 
     public ArvoreBinaria() {
         this.raiz = new No(null);
